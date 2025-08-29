@@ -1,5 +1,6 @@
 development:
-  adapter: async
+  adapter: redis
+  url: <%= ENV.fetch("REDIS_URL") { "redis://#{ENV.fetch('REDIS_HOST', 'redis')}:#{ENV.fetch('REDIS_PORT', 6379)}/3" } %>
 
 test:
   adapter: test

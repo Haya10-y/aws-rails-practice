@@ -1,2 +1,5 @@
 #Ignore DB files
 /db_data/*
+
+#Ignore Redis files
+/data/*
