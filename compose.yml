@@ -2,6 +2,7 @@ version: '3.8'
 
 services:
   web:
+    restart: always
     build: .
     ports:
       - '3000:3000'
@@ -15,8 +16,11 @@ services:
         target: /webapp
     depends_on:
       - db
+      - redis
+    tty: true
 
   db:
+    restart: always
     image: mysql:8.3
     environment:
       MYSQL_ROOT_PASSWORD: password
@@ -26,3 +30,12 @@ services:
       - type: bind
         source: ./db_data
         target: /var/lib/mysql
+    tty: true
+
+  redis:
+    image: redis:latest
+    restart: always
+    ports:
+      - '6379:6379'
+    volumes:
+      - ./data/redis:/data

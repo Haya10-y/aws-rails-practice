@@ -65,7 +65,14 @@ Rails.application.configure do
   config.log_level = ENV.fetch("RAILS_LOG_LEVEL", "info")
 
   # Use a different cache store in production.
-  # config.cache_store = :mem_cache_store
+  config.cache_store = :redis_cache_store, {
+    host: ENV.fetch('REDIS_HOST', 'localhost'),
+    port: ENV.fetch('REDIS_PORT', 6379),
+    db: ENV.fetch('REDIS_CACHE_DB', 1),
+    password: ENV.fetch('REDIS_PASSWORD', nil),
+    pool_size: ENV.fetch('REDIS_POOL_SIZE', 5).to_i,
+    pool_timeout: ENV.fetch('REDIS_POOL_TIMEOUT', 5).to_i
+  }
 
   # Use a real queuing backend for Active Job (and separate queues per environment).
   # config.active_job.queue_adapter = :resque

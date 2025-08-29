@@ -4,7 +4,7 @@ WORKDIR /webapp
 
 # GemfileとGemfile.lockファイルを
 # イメージのwebappディレクトリ内にコピー
-COPY Gemfile* /webapp/
+COPY webapp/Gemfile* /webapp/
 
 RUN bundle install
 
