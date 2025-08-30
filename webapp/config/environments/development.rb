@@ -24,7 +24,7 @@ Rails.application.configure do
     config.action_controller.enable_fragment_cache_logging = true
 
     config.cache_store = :redis_cache_store, {
-      host: ENV.fetch('REDIS_HOST', 'localhost'),
+      host: ENV.fetch('REDIS_HOST', 'redis'),
       port: ENV.fetch('REDIS_PORT', 6379),
       db: ENV.fetch('REDIS_CACHE_DB', 1),
       password: ENV.fetch('REDIS_PASSWORD', nil)
@@ -34,8 +34,8 @@ Rails.application.configure do
     }
   else
     config.action_controller.perform_caching = false
-
-    config.cache_store = :null_store
+    # Use memory store instead of null store for sessions
+    config.cache_store = :memory_store
   end
 
   # Store uploaded files on the local file system (see config/storage.yml for options).
