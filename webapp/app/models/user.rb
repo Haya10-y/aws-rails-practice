@@ -12,13 +12,13 @@ class User < ApplicationRecord
   validates :password, presence: true, length: { minimum: 8 },
                        format: {
                          with: /\A(?=.*[a-z])(?=.*[A-Z]).+\z/,
-                         message: 'must contain at least one lowercase and one uppercase letter',
+                         message: 'must contain at least one lowercase and one uppercase letter'
                        },
                        on: :create
   validates :password, length: { minimum: 8 },
                        format: {
                          with: /\A(?=.*[a-z])(?=.*[A-Z]).+\z/,
-                         message: 'must contain at least one lowercase and one uppercase letter',
+                         message: 'must contain at least one lowercase and one uppercase letter'
                        },
                        on: :update, allow_blank: true
 end

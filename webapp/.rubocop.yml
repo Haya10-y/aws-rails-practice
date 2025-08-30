@@ -43,13 +43,13 @@ Style/StringLiteralsInInterpolation:
   EnforcedStyle: single_quotes
 
 Style/TrailingCommaInArrayLiteral:
-  EnforcedStyleForMultiline: consistent_comma
+  EnforcedStyleForMultiline: no_comma
 
 Style/TrailingCommaInHashLiteral:
-  EnforcedStyleForMultiline: consistent_comma
+  EnforcedStyleForMultiline: no_comma
 
 Style/TrailingCommaInArguments:
-  EnforcedStyleForMultiline: consistent_comma
+  EnforcedStyleForMultiline: no_comma
 
 # Metrics
 Metrics/BlockLength:
