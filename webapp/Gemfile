@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 source "https://rubygems.org"
 
 ruby "3.3.9"
@@ -39,7 +41,7 @@ gem "devise"
 # gem "bcrypt", "~> 3.1.7"
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem "tzinfo-data", platforms: %i[ windows jruby ]
+gem "tzinfo-data", platforms: %i[windows jruby]
 
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", require: false
@@ -49,11 +51,17 @@ gem "bootsnap", require: false
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
-  gem "debug", platforms: %i[ mri windows ]
+  gem "debug", platforms: %i[mri windows]
   # RSpec for testing
   gem "rspec-rails"
   # Factory for test data
   gem "factory_bot_rails"
+  # RuboCop for code linting and formatting
+  gem "rubocop", require: false
+  gem "rubocop-capybara", require: false
+  gem "rubocop-factory_bot", require: false
+  gem "rubocop-rails", require: false
+  gem "rubocop-rspec", require: false
 end
 
 group :development do
@@ -72,6 +80,6 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
   # Additional RSpec gems for better testing experience
-  gem "shoulda-matchers"
   gem "database_cleaner-active_record"
+  gem "shoulda-matchers"
 end

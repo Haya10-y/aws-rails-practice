@@ -1,16 +1,18 @@
-require 'rails_helper'
+# frozen_string_literal: true
+
+require "rails_helper"
 
 RSpec.describe User, type: :model do
   describe "validations" do
     subject { build(:user) }
 
-    it { should validate_presence_of(:name) }
-    it { should validate_presence_of(:email) }
-    it { should validate_uniqueness_of(:email).case_insensitive }
+    it { is_expected.to validate_presence_of(:name) }
+    it { is_expected.to validate_presence_of(:email) }
+    it { is_expected.to validate_uniqueness_of(:email).case_insensitive }
 
     context "when creating a user" do
-      it { should validate_presence_of(:password) }
-      it { should validate_length_of(:password).is_at_least(8) }
+      it { is_expected.to validate_presence_of(:password) }
+      it { is_expected.to validate_length_of(:password).is_at_least(8) }
 
       it "validates password format with lowercase and uppercase" do
         user = build(:user, password: "password123", password_confirmation: "password123")
@@ -40,10 +42,10 @@ RSpec.describe User, type: :model do
   end
 
   describe "Devise modules" do
-    it { should respond_to(:email) }
-    it { should respond_to(:encrypted_password) }
-    it { should respond_to(:reset_password_token) }
-    it { should respond_to(:confirmation_token) }
-    it { should respond_to(:confirmed_at) }
+    it { is_expected.to respond_to(:email) }
+    it { is_expected.to respond_to(:encrypted_password) }
+    it { is_expected.to respond_to(:reset_password_token) }
+    it { is_expected.to respond_to(:confirmation_token) }
+    it { is_expected.to respond_to(:confirmed_at) }
   end
 end
