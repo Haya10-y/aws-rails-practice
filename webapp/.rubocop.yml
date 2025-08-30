@@ -102,3 +102,9 @@ RSpec/MultipleMemoizedHelpers:
 
 RSpec/NestedGroups:
   Max: 5
+
+RSpec/SortMetadata:
+  Enabled: false
+
+RSpec/MetadataStyle:
+  Enabled: false

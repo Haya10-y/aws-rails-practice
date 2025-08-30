@@ -7,7 +7,7 @@ RSpec.configure do |config|
     driven_by :rack_test
   end
 
-  config.before(:each, :js, type: :system) do
+  config.before(:each, type: :system, js: true) do
     driven_by :selenium_chrome_headless
   end
 end
