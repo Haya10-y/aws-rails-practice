@@ -4,6 +4,5 @@ class UsersController < ApplicationController
   before_action :authenticate_user!
 
   def mypage
-    # マイページの表示
   end
 end

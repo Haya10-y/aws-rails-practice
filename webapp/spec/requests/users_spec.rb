@@ -52,8 +52,6 @@ RSpec.describe 'Users', type: :request do
   end
 
   describe 'POST /users/sign_in' do
-    let(:user) { create(:user, name: 'テストユーザー', email: 'test@example.com') }
-
     it 'ログイン後にマイページにリダイレクトされる' do
       # ログインページにアクセス
       get new_user_session_path
