@@ -5,6 +5,10 @@ require 'sidekiq/web'
 Rails.application.routes.draw do
   get 'home/index'
   devise_for :users
+
+  # Users routes
+  get 'users/mypage', to: 'users#mypage', as: 'users_mypage'
+
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Sidekiq Web interface
