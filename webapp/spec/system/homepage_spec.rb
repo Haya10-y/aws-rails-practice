@@ -10,6 +10,6 @@ RSpec.describe 'Application', type: :system do
 
   it 'can access the sign up page' do
     visit new_user_registration_path
-    expect(page).to have_content('Sign up')
+    expect(page).to have_content('新規登録')
   end
 end
