@@ -88,4 +88,6 @@ group :test do
   # Additional RSpec gems for better testing experience
   gem 'database_cleaner-active_record'
   gem 'shoulda-matchers'
+  # JUnit formatter for RSpec (for CI)
+  gem 'rspec_junit_formatter'
 end

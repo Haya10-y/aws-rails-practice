@@ -1,0 +1,132 @@
+name: CI
+
+on:
+  pull_request:
+
+env:
+  RUBY_VERSION: 3.3.9
+  RAILS_ENV: test
+  DATABASE_URL: mysql2://root:password@127.0.0.1:3306/webapp_test
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ROOT_PASSWORD: password
+          MYSQL_DATABASE: webapp_test
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=3
+
+      redis:
+        image: redis:7-alpine
+        ports:
+          - 6379:6379
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: ${{ env.RUBY_VERSION }}
+        working-directory: webapp
+        bundler-cache: true
+
+    - name: Cache node modules
+      uses: actions/cache@v4
+      with:
+        path: webapp/node_modules
+        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-node-
+
+    - name: Install dependencies
+      working-directory: webapp
+      run: |
+        gem install bundler
+        bundle install --jobs 4 --retry 3
+
+    - name: Wait for MySQL to be ready
+      run: |
+        until mysqladmin ping -h 127.0.0.1 -P 3306 -u root -ppassword --silent; do
+          echo 'Waiting for MySQL to be available...'
+          sleep 5
+        done
+        echo 'MySQL is ready!'
+
+    - name: Setup database
+      working-directory: webapp
+      run: |
+        bundle exec rails db:create
+        bundle exec rails db:migrate
+
+    - name: Precompile assets
+      working-directory: webapp
+      run: |
+        bundle exec rails assets:precompile
+
+    - name: Run RSpec tests
+      working-directory: webapp
+      run: |
+        bundle exec rspec --format progress --format RspecJunitFormatter --out tmp/rspec.xml
+
+    - name: Upload test results
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: rspec-results
+        path: webapp/tmp/rspec.xml
+
+  rubocop:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: ${{ env.RUBY_VERSION }}
+        working-directory: webapp
+        bundler-cache: true
+
+    - name: Install dependencies
+      working-directory: webapp
+      run: |
+        gem install bundler
+        bundle install --jobs 4 --retry 3
+
+    - name: Run RuboCop
+      working-directory: webapp
+      run: |
+        bundle exec rubocop --format github
+
+    - name: Run RuboCop with JSON output
+      if: always()
+      working-directory: webapp
+      run: |
+        bundle exec rubocop --format json --out tmp/rubocop.json
+      continue-on-error: true
+
+    - name: Upload RuboCop results
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: rubocop-results
+        path: webapp/tmp/rubocop.json
