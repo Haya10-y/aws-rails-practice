@@ -10,6 +10,8 @@ services:
       MYSQL_HOST: db
       MYSQL_USER: root
       MYSQL_PASSWORD: password
+      SMTP_HOST: mailhog
+      SMTP_PORT: 1025
     volumes:
       - type: bind
         source: ./webapp
@@ -17,6 +19,7 @@ services:
     depends_on:
       - db
       - redis
+      - mailhog
     tty: true
 
   db:
@@ -39,3 +42,12 @@ services:
       - '6379:6379'
     volumes:
       - ./data/redis:/data
+
+  mailhog:
+    image: mailhog/mailhog:latest
+    restart: always
+    ports:
+      - '1025:1025'  # SMTP server
+      - '8025:8025'  # Web UI
+    environment:
+      MH_STORAGE: memory
