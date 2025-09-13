@@ -24,7 +24,7 @@ module Webapp
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
 
-    # Configure Active Job to use default adapter (async for development)
-    # config.active_job.queue_adapter = :redis
+    # Configure Active Job to use Sidekiq adapter
+    config.active_job.queue_adapter = :sidekiq
   end
 end

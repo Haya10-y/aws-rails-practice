@@ -43,6 +43,26 @@ services:
     volumes:
       - ./data/redis:/data
 
+  worker:
+    restart: always
+    build: .
+    command: bundle exec sidekiq
+    environment:
+      MYSQL_HOST: db
+      MYSQL_USER: root
+      MYSQL_PASSWORD: password
+      SMTP_HOST: mailhog
+      SMTP_PORT: 1025
+    volumes:
+      - type: bind
+        source: ./webapp
+        target: /webapp
+    depends_on:
+      - db
+      - redis
+      - mailhog
+    tty: true
+
   mailhog:
     image: mailhog/mailhog:latest
     restart: always
