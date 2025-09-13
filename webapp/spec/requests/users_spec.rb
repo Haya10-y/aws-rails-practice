@@ -26,8 +26,8 @@ RSpec.describe 'Users', type: :request do
         get users_mypage_path
         expect(response.body).to include(user.name)
         expect(response.body).to include(user.email)
-        expect(response.body).to include(user.created_at.strftime("%Y年%m月%d日"))
-        expect(response.body).to include(user.updated_at.strftime("%Y年%m月%d日"))
+        expect(response.body).to include(user.created_at.strftime('%Y年%m月%d日'))
+        expect(response.body).to include(user.updated_at.strftime('%Y年%m月%d日'))
       end
 
       it 'ナビゲーションにマイページリンクが含まれる' do

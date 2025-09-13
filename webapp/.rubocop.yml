@@ -51,6 +51,9 @@ Style/TrailingCommaInHashLiteral:
 Style/TrailingCommaInArguments:
   EnforcedStyleForMultiline: no_comma
 
+Style/EmptyMethod:
+  Enabled: false
+
 # Metrics
 Metrics/BlockLength:
   Exclude:
@@ -107,4 +110,7 @@ RSpec/SortMetadata:
   Enabled: false
 
 RSpec/MetadataStyle:
+  Enabled: false
+
+RSpec/ContextWording:
   Enabled: false
