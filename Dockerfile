@@ -1,4 +1,4 @@
-FROM ruby:3.3
+FROM ruby:3.3.9
 
 WORKDIR /webapp
 
