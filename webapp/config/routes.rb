@@ -9,6 +9,9 @@ Rails.application.routes.draw do
   # Users routes
   get 'users/mypage', to: 'users#mypage', as: 'users_mypage'
 
+  # Posts routes
+  resources :posts, only: [:new, :create]
+
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Sidekiq Web interface
