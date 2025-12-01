@@ -1,25 +1,6 @@
 <div class="min-h-screen bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-500">
   <!-- Navigation -->
-  <nav class="bg-white shadow-lg">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex justify-between items-center h-16">
-        <div class="flex items-center">
-          <%= link_to root_path, class: "text-xl font-bold text-gray-800 hover:text-indigo-600 transition duration-150 ease-in-out" do %>
-            WebApp
-          <% end %>
-        </div>
-        <div class="flex space-x-4 items-center">
-          <% if user_signed_in? %>
-            <span class="text-gray-700">こんにちは、<%= current_user.name %>さん</span>
-            <%= link_to "マイページ", users_mypage_path,
-                       class: "text-indigo-600 hover:text-indigo-500 font-medium transition duration-150 ease-in-out" %>
-            <%= link_to "ログアウト", destroy_user_session_path, data: { turbo_method: :delete },
-                       class: "bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700 transition duration-150 ease-in-out" %>
-          <% end %>
-        </div>
-      </div>
-    </div>
-  </nav>
+  <%= render 'shared/navigation' %>
 
   <!-- Main Content -->
   <div class="relative py-24">

@@ -1,0 +1,31 @@
+<nav class="bg-white shadow-lg">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between items-center h-16">
+      <div class="flex items-center">
+        <%= link_to root_path, class: "text-xl font-bold text-gray-800 hover:text-indigo-600 transition duration-150 ease-in-out" do %>
+          WebApp
+        <% end %>
+      </div>
+      <div class="flex space-x-4 items-center">
+        <% if user_signed_in? %>
+          <span class="text-gray-700">こんにちは、<%= current_user.name %>さん</span>
+          <%= link_to new_post_path, class: "flex items-center gap-2 bg-purple-500 hover:bg-purple-600 text-white px-4 py-2 rounded-md transition duration-150 ease-in-out font-medium" do %>
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path>
+            </svg>
+            投稿
+          <% end %>
+          <%= link_to "マイページ", users_mypage_path,
+                     class: "text-indigo-600 hover:text-indigo-500 font-medium transition duration-150 ease-in-out" %>
+          <%= link_to "ログアウト", destroy_user_session_path, data: { turbo_method: :delete },
+                     class: "bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700 transition duration-150 ease-in-out" %>
+        <% else %>
+          <%= link_to "ログイン", new_user_session_path,
+                     class: "text-indigo-600 hover:text-indigo-500 font-medium transition duration-150 ease-in-out" %>
+          <%= link_to "新規登録", new_user_registration_path,
+                     class: "bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700 transition duration-150 ease-in-out" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</nav>
