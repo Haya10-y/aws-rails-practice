@@ -114,3 +114,13 @@ RSpec/MetadataStyle:
 
 RSpec/ContextWording:
   Enabled: false
+
+RSpec/IndexedLet:
+  Enabled: false
+
+RSpec/LetSetup:
+  Enabled: false
+
+# FactoryBot specific
+FactoryBot/AssociationStyle:
+  Enabled: false

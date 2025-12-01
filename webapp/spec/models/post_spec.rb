@@ -6,8 +6,8 @@ RSpec.describe Post, type: :model do
   let(:user) { create(:user) }
 
   describe 'associations' do
-    it { should belong_to(:user) }
-    it { should have_one_attached(:image) }
+    it { is_expected.to belong_to(:user) }
+    it { is_expected.to have_one_attached(:image) }
   end
 
   describe 'validations' do
@@ -26,7 +26,7 @@ RSpec.describe Post, type: :model do
       it 'allows blank content if image is attached' do
         post = build(:post, user: user, content: '')
         post.image.attach(
-          io: File.open(Rails.root.join('spec', 'fixtures', 'files', 'test_image.png')),
+          io: Rails.root.join('spec', 'fixtures', 'files', 'test_image.png').open,
           filename: 'test_image.png',
           content_type: 'image/png'
         )
@@ -55,7 +55,7 @@ RSpec.describe Post, type: :model do
       it 'is valid when content is blank but image is attached' do
         post = build(:post, user: user, content: '')
         post.image.attach(
-          io: File.open(Rails.root.join('spec', 'fixtures', 'files', 'test_image.png')),
+          io: Rails.root.join('spec', 'fixtures', 'files', 'test_image.png').open,
           filename: 'test_image.png',
           content_type: 'image/png'
         )
@@ -65,7 +65,7 @@ RSpec.describe Post, type: :model do
       it 'is valid when both content and image are present' do
         post = build(:post, user: user, content: 'Valid content')
         post.image.attach(
-          io: File.open(Rails.root.join('spec', 'fixtures', 'files', 'test_image.png')),
+          io: Rails.root.join('spec', 'fixtures', 'files', 'test_image.png').open,
           filename: 'test_image.png',
           content_type: 'image/png'
         )

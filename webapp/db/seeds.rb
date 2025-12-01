@@ -38,8 +38,8 @@ users_data.each do |user_data|
     user.assign_attributes(user_data)
     user.skip_confirmation! # Skip email confirmation for seed data
     user.save!
-    puts "Created user: #{user.email}"
+    Rails.logger.debug { "Created user: #{user.email}" }
   else
-    puts "User already exists: #{user.email}"
+    Rails.logger.debug { "User already exists: #{user.email}" }
   end
 end

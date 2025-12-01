@@ -11,8 +11,8 @@ class Post < ApplicationRecord
   private
 
   def content_or_image_present
-    if content.blank? && !image.attached?
-      errors.add(:base, 'Content or image must be present')
-    end
+    return unless content.blank? && !image.attached?
+
+    errors.add(:base, 'Content or image must be present')
   end
 end

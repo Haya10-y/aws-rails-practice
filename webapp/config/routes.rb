@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   get 'users/:id/posts', to: 'users#posts', as: 'user_posts'
 
   # Posts routes
-  resources :posts, only: [:new, :create]
+  resources :posts, only: %i[new create]
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

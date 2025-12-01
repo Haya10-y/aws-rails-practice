@@ -145,7 +145,7 @@ RSpec.describe 'Users', type: :request do
         let!(:post_with_image) do
           post = create(:post, user: user, content: '画像付き投稿')
           post.image.attach(
-            io: File.open(Rails.root.join('spec', 'fixtures', 'files', 'test_image.png')),
+            io: Rails.root.join('spec', 'fixtures', 'files', 'test_image.png').open,
             filename: 'test_image.png',
             content_type: 'image/png'
           )
@@ -164,7 +164,7 @@ RSpec.describe 'Users', type: :request do
         let!(:image_only_post) do
           post = build(:post, user: user, content: '')
           post.image.attach(
-            io: File.open(Rails.root.join('spec', 'fixtures', 'files', 'test_image.png')),
+            io: Rails.root.join('spec', 'fixtures', 'files', 'test_image.png').open,
             filename: 'test_image.png',
             content_type: 'image/png'
           )
