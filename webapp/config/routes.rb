@@ -8,6 +8,7 @@ Rails.application.routes.draw do
 
   # Users routes
   get 'users/mypage', to: 'users#mypage', as: 'users_mypage'
+  get 'users/:id/posts', to: 'users#posts', as: 'user_posts'
 
   # Posts routes
   resources :posts, only: [:new, :create]

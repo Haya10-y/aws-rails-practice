@@ -81,6 +81,16 @@
             </div>
           <% end %>
         </div>
+
+        <!-- View All Posts Link -->
+        <div class="mt-8 text-center">
+          <%= link_to user_posts_path(current_user), class: "inline-flex items-center gap-2 text-indigo-600 hover:text-indigo-500 font-semibold text-lg transition duration-150 ease-in-out" do %>
+            すべての投稿を見る
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+            </svg>
+          <% end %>
+        </div>
       </div>
     </div>
   <% end %>

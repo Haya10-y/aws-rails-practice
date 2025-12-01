@@ -49,7 +49,7 @@ RSpec.describe 'Homes', type: :request do
 
         it 'displays only the 3 most recent posts' do
           get root_path
-          
+
           # 最新3件の投稿が含まれていることを確認
           expect(response.body).to include('Fourth post (newest)')
           expect(response.body).to include('Third post')
@@ -62,12 +62,12 @@ RSpec.describe 'Homes', type: :request do
 
         it 'displays posts in descending order by created_at' do
           get root_path
-          
+
           # レスポンスボディから投稿の順序を確認
           fourth_position = response.body.index('Fourth post (newest)')
           third_position = response.body.index('Third post')
           second_position = response.body.index('Second post')
-          
+
           expect(fourth_position).to be < third_position
           expect(third_position).to be < second_position
         end
@@ -75,4 +75,3 @@ RSpec.describe 'Homes', type: :request do
     end
   end
 end
-
