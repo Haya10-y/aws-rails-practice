@@ -9,3 +9,37 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+
+# Create sample users
+users_data = [
+  {
+    name: 'User One',
+    email: 'someone@example.com',
+    password: 'Password1',
+    password_confirmation: 'Password1'
+  },
+  {
+    name: 'User Two',
+    email: 'someone2@example.com',
+    password: 'Password2',
+    password_confirmation: 'Password2'
+  },
+  {
+    name: 'User Three',
+    email: 'someone3@example.com',
+    password: 'Password3',
+    password_confirmation: 'Password3'
+  }
+]
+
+users_data.each do |user_data|
+  user = User.find_or_initialize_by(email: user_data[:email])
+  if user.new_record?
+    user.assign_attributes(user_data)
+    user.skip_confirmation! # Skip email confirmation for seed data
+    user.save!
+    Rails.logger.debug { "Created user: #{user.email}" }
+  else
+    Rails.logger.debug { "User already exists: #{user.email}" }
+  end
+end

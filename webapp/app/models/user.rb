@@ -7,6 +7,9 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable,
          :confirmable, :trackable
 
+  # Associations
+  has_many :posts, dependent: :destroy
+
   # Validations
   validates :name, presence: true
   validates :password, presence: true, length: { minimum: 8 },
