@@ -10,10 +10,10 @@ local:
 # These values should be set in .env file (or AWS Secrets Manager in production)
 amazon:
   service: S3
-  access_key_id: <%= ENV['AWS_ACCESS_KEY_ID'] %>
-  secret_access_key: <%= ENV['AWS_SECRET_ACCESS_KEY'] %>
-  region: <%= ENV['AWS_REGION'] %>
-  bucket: <%= ENV['S3_BUCKET'] %>
+  access_key_id: <%= ENV.fetch('AWS_ACCESS_KEY_ID') { raise 'AWS_ACCESS_KEY_ID is required for S3 storage' } %>
+  secret_access_key: <%= ENV.fetch('AWS_SECRET_ACCESS_KEY') { raise 'AWS_SECRET_ACCESS_KEY is required for S3 storage' } %>
+  region: <%= ENV.fetch('AWS_REGION', 'ap-northeast-1') %>
+  bucket: <%= ENV.fetch('S3_BUCKET') { raise 'S3_BUCKET is required for S3 storage' } %>
 
 # Use bin/rails credentials:edit to set the AWS secrets (as aws:access_key_id|secret_access_key)
 # amazon:
