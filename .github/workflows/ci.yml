@@ -7,6 +7,10 @@ env:
   RUBY_VERSION: 3.3.9
   RAILS_ENV: test
   DATABASE_URL: mysql2://root:password@127.0.0.1:3306/webapp_test
+  AWS_ACCESS_KEY_ID: dummy_access_key_id_for_github_actions
+  AWS_SECRET_ACCESS_KEY: dummy_secret_access_key_for_github_actions
+  AWS_REGION: ap-northeast-1
+  S3_BUCKET: dummy_s3_bucket_for_github_actions
 
 jobs:
   test:

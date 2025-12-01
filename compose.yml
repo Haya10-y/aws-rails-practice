@@ -6,6 +6,8 @@ services:
     build: .
     ports:
       - '3000:3000'
+    env_file:
+      - ./webapp/.env
     environment:
       MYSQL_HOST: db
       MYSQL_USER: root
@@ -47,6 +49,8 @@ services:
     restart: always
     build: .
     command: bundle exec sidekiq
+    env_file:
+      - ./webapp/.env
     environment:
       MYSQL_HOST: db
       MYSQL_USER: root
