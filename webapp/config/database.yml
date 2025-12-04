@@ -51,5 +51,5 @@ test:
 production:
   <<: *default
   database: webapp_production
-  username: webapp
+  username: admin # RDS default admin user
   password: <%= ENV["WEBAPP_DATABASE_PASSWORD"] %>
