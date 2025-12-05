@@ -66,12 +66,8 @@ Rails.application.configure do
 
   # Use a different cache store in production.
   config.cache_store = :redis_cache_store, {
-    host: ENV.fetch('REDIS_HOST', 'localhost'),
-    port: ENV.fetch('REDIS_PORT', 6379),
-    db: ENV.fetch('REDIS_CACHE_DB', 1),
-    password: ENV.fetch('REDIS_PASSWORD', nil),
-    pool_size: ENV.fetch('REDIS_POOL_SIZE', 5).to_i,
-    pool_timeout: ENV.fetch('REDIS_POOL_TIMEOUT', 5).to_i
+    url: ENV.fetch("REDIS_URL", "redis://localhost:6379/1"),
+    ssl_params: { verify_mode: OpenSSL::SSL::VERIFY_NONE }
   }
 
   # Use a real queuing backend for Active Job (and separate queues per environment).
