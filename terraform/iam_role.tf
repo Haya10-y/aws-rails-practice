@@ -1,0 +1,137 @@
+# __generated__ by Terraform
+# Please review these resources and move them into your main configuration files.
+
+# __generated__ by Terraform
+resource "aws_iam_role" "ecs-task-execution" {
+  provider = aws
+  assume_role_policy = jsonencode({
+    Statement = [{
+      Action = "sts:AssumeRole"
+      Effect = "Allow"
+      Principal = {
+        Service = "ecs-tasks.amazonaws.com"
+      }
+      Sid = ""
+    }]
+    Version = "2008-10-17"
+  })
+  description           = null
+  force_detach_policies = null
+  max_session_duration  = 3600
+  name                  = "ecsTaskExecutionRole"
+  path                  = "/"
+  permissions_boundary  = null
+  tags                  = {}
+  tags_all              = {}
+}
+
+import {
+  to       = aws_iam_role.ecs-task-execution
+  provider = aws
+  identity = {
+    account_id = "416000664814"
+    name       = "ecsTaskExecutionRole"
+  }
+}
+
+resource "aws_iam_role" "secret-values" {
+  provider = aws
+  assume_role_policy = jsonencode({
+    Statement = [{
+      Action = "sts:AssumeRole"
+      Effect = "Allow"
+      Principal = {
+        Service = "ecs-tasks.amazonaws.com"
+      }
+      Sid = ""
+    }]
+    Version = "2012-10-17"
+  })
+  description           = "Allows ECS tasks to call AWS services on your behalf."
+  force_detach_policies = null
+  max_session_duration  = 3600
+  name                  = "get-secret-values-for-ecs"
+  path                  = "/"
+  permissions_boundary  = null
+  tags                  = {}
+  tags_all              = {}
+}
+
+import {
+  to       = aws_iam_role.secret-values
+  provider = aws
+  identity = {
+    account_id = "416000664814"
+    name       = "get-secret-values-for-ecs"
+  }
+}
+
+resource "aws_iam_role" "oidc" {
+  provider = aws
+  assume_role_policy = jsonencode({
+    Statement = [{
+      Action = "sts:AssumeRoleWithWebIdentity"
+      Condition = {
+        StringEquals = {
+          "token.actions.githubusercontent.com:aud" = "sts.amazonaws.com"
+          "token.actions.githubusercontent.com:sub" = "repo:Haya10-y/aws-rails-practice:ref:refs/heads/production"
+        }
+      }
+      Effect = "Allow"
+      Principal = {
+        Federated = "arn:aws:iam::416000664814:oidc-provider/token.actions.githubusercontent.com"
+      }
+      Sid = ""
+    }]
+    Version = "2012-10-17"
+  })
+  description           = null
+  force_detach_policies = null
+  max_session_duration  = 3600
+  name                  = "github-actions-oidc-test"
+  path                  = "/"
+  permissions_boundary  = null
+  tags                  = {}
+  tags_all              = {}
+}
+
+import {
+  to       = aws_iam_role.oidc
+  provider = aws
+  identity = {
+    account_id = "416000664814"
+    name       = "github-actions-oidc-test"
+  }
+}
+
+resource "aws_iam_role" "rds-monitoring" {
+  provider = aws
+  assume_role_policy = jsonencode({
+    Statement = [{
+      Action = "sts:AssumeRole"
+      Effect = "Allow"
+      Principal = {
+        Service = "monitoring.rds.amazonaws.com"
+      }
+      Sid = ""
+    }]
+    Version = "2012-10-17"
+  })
+  description           = null
+  force_detach_policies = null
+  max_session_duration  = 3600
+  name                  = "rds-monitoring-role"
+  path                  = "/"
+  permissions_boundary  = null
+  tags                  = {}
+  tags_all              = {}
+}
+
+import {
+  to       = aws_iam_role.rds-monitoring
+  provider = aws
+  identity = {
+    account_id = "416000664814"
+    name       = "rds-monitoring-role"
+  }
+}
