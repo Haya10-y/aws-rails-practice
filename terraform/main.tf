@@ -6,8 +6,12 @@ terraform {
     }
   }
 
-  backend "local" {
-    path = "./scratch_state/terraform.tfstate"
+  backend "s3" {
+    bucket = "haya10-tfstate-bucket-h2af"
+    key    = "terraform/terraform.tfstate"
+    region = "ap-northeast-1"
+    profile = "terraform"
+    encrypt = true
   }
 }
 
