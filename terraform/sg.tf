@@ -16,7 +16,19 @@ resource "aws_security_group" "rds" {
       self = false
     }
   ]
-  egress  = []
+  egress  = [
+    {
+      description = " "
+      ipv6_cidr_blocks = []
+      prefix_list_ids = []
+      security_groups = []
+      self = false
+      from_port   = 0
+      to_port     = 0
+      protocol    = "-1"
+      cidr_blocks = ["0.0.0.0/0"]
+    }
+  ]
 }
 
 resource "aws_security_group" "elasticache" {
@@ -37,7 +49,19 @@ resource "aws_security_group" "elasticache" {
       self = false
     }
   ]
-  egress  = []
+  egress  = [
+    {
+      description = " "
+      ipv6_cidr_blocks = []
+      prefix_list_ids = []
+      security_groups = []
+      self = false
+      from_port   = 0
+      to_port     = 0
+      protocol    = "-1"
+      cidr_blocks = ["0.0.0.0/0"]
+    }
+  ]
 }
 
 resource "aws_security_group" "alb" {
@@ -69,7 +93,19 @@ resource "aws_security_group" "alb" {
       self = false
     }
   ]
-  egress  = []
+  egress  = [
+    {
+      description = " "
+      ipv6_cidr_blocks = []
+      prefix_list_ids = []
+      security_groups = []
+      self = false
+      from_port   = 0
+      to_port     = 0
+      protocol    = "-1"
+      cidr_blocks = ["0.0.0.0/0"]
+    }
+  ]
 }
 
 resource "aws_security_group" "ecs-exec" {
@@ -123,5 +159,17 @@ resource "aws_security_group" "ecs" {
       self = false
     }
   ]
-  egress  = []
+  egress  = [
+    {
+      description = " "
+      ipv6_cidr_blocks = []
+      prefix_list_ids = []
+      security_groups = []
+      self = false
+      from_port   = 0
+      to_port     = 0
+      protocol    = "-1"
+      cidr_blocks = ["0.0.0.0/0"]
+    }
+  ]
 }
