@@ -249,3 +249,53 @@ resource "aws_ecs_task_definition" "rails-test" {
     }
   ])
 }
+
+resource "aws_ecs_service" "rails-test" {
+  name            = "aws-rails-test-task-def-service-gs84tbg4"
+  cluster         = aws_ecs_cluster.rails-test.id
+  task_definition = aws_ecs_task_definition.rails-test.arn
+  desired_count   = 1
+  enable_ecs_managed_tags = true
+  enable_execute_command = true
+  health_check_grace_period_seconds = 0
+  propagate_tags = "NONE"
+
+  capacity_provider_strategy {
+    base = 0
+    capacity_provider = "FARGATE"
+    weight = 1
+  }
+
+  deployment_circuit_breaker {
+    enable = true
+    rollback = true
+  }
+
+  deployment_configuration {
+    bake_time_in_minutes = "0"
+    strategy = "ROLLING"
+  }
+
+  deployment_controller {
+    type = "ECS"
+  }
+
+  network_configuration {
+    subnets         = [aws_subnet.private_a.id, aws_subnet.private_c.id]
+    security_groups = [aws_security_group.ecs.id]
+    assign_public_ip = false
+  }
+
+  load_balancer {
+    target_group_arn = aws_lb_target_group.rails-test.arn
+    container_name   = "webapp"
+    container_port   = 3000
+  }
+
+  # タスク定義のリビジョン変更は無視。
+  lifecycle {
+    ignore_changes = [
+      task_definition,
+    ]
+  }
+}
