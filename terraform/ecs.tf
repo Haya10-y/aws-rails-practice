@@ -254,7 +254,7 @@ resource "aws_ecs_service" "rails-test" {
   name            = "aws-rails-test-task-def-service-gs84tbg4"
   cluster         = aws_ecs_cluster.rails-test.id
   task_definition = aws_ecs_task_definition.rails-test.arn
-  desired_count   = 1
+  desired_count   = 0 # TODO: 本番時には 1 にすること
   enable_ecs_managed_tags = true
   enable_execute_command = true
   health_check_grace_period_seconds = 0

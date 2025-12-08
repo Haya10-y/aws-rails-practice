@@ -79,7 +79,7 @@ resource "aws_iam_role" "oidc" {
       }
       Effect = "Allow"
       Principal = {
-        Federated = "arn:aws:iam::416000664814:oidc-provider/token.actions.githubusercontent.com"
+        Federated = aws_iam_openid_connect_provider.github-actions.arn
       }
       Sid = ""
     }]

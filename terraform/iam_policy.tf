@@ -29,7 +29,7 @@ resource "aws_iam_policy" "secret-values" {
           "secretsmanager:GetSecretValue",
         ]
         Effect = "Allow"
-        Resource = "arn:aws:secretsmanager:ap-northeast-1:416000664814:secret:aws-rails-test-secrets-higJwm"
+        Resource = aws_secretsmanager_secret.rails-test.arn
       },
     ]
     Version = "2012-10-17"
@@ -52,8 +52,8 @@ resource "aws_iam_policy" "s3" {
         ]
         Effect = "Allow"
         Resource = [
-          "arn:aws:s3:::haya10-s3-test-bucket-r03v/*",
-          "arn:aws:s3:::haya10-s3-test-bucket-r03v",
+          "${aws_s3_bucket.rails-test.arn}/*",
+          aws_s3_bucket.rails-test.arn,
         ]
         Sid = "VisualEditor0"
       },
@@ -82,7 +82,7 @@ resource "aws_iam_policy" "github-actions" {
           "ecr:BatchCheckLayerAvailability",
         ]
         Effect = "Allow"
-        Resource = "arn:aws:ecr:ap-northeast-1:416000664814:repository/aws-rails-test"
+        Resource = aws_ecr_repository.rails-test.arn
       }
     ]
     Version = "2012-10-17"
