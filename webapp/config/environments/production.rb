@@ -92,7 +92,6 @@ Rails.application.configure do
   }
 
   config.action_mailer.default_options = { from: ENV.fetch('SENDER_ADDRESS', 'no-reply@example.com') }
-  config.mailer_sender = ENV.fetch('SENDER_ADDRESS', 'no-reply@example.com')
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.

@@ -13,8 +13,7 @@ EXPOSE 3000
 
 # アセットのプリコンパイル
 # Tailwind CSS などのビルドに必要
-ENV RAILS_ENV=production
-RUN bundle exec rails assets:precompile
+RUN RAILS_ENV=production bundle exec rails assets:precompile
 
 # Entrypoint スクリプトをコピーして実行権限を付与
 # pid ファイルの削除を行う
