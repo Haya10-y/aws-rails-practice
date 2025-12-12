@@ -11,14 +11,10 @@ resource "aws_iam_role" "ecs-task-execution" {
     }]
     Version = "2008-10-17"
   })
-  description           = null
-  force_detach_policies = null
+  description           = "Allows ECS services to execute tasks."
   max_session_duration  = 3600
   name                  = "ecsTaskExecutionRole"
   path                  = "/"
-  permissions_boundary  = null
-  tags                  = {}
-  tags_all              = {}
 }
 
 resource "aws_iam_role" "secret-values" {
@@ -35,13 +31,9 @@ resource "aws_iam_role" "secret-values" {
     Version = "2012-10-17"
   })
   description           = "Allows ECS tasks to call AWS services on your behalf."
-  force_detach_policies = null
   max_session_duration  = 3600
   name                  = "get-secret-values-for-ecs"
   path                  = "/"
-  permissions_boundary  = null
-  tags                  = {}
-  tags_all              = {}
 }
 
 resource "aws_iam_role" "oidc" {
@@ -63,14 +55,10 @@ resource "aws_iam_role" "oidc" {
     }]
     Version = "2012-10-17"
   })
-  description           = null
-  force_detach_policies = null
+  description           = "Allows GitHub Actions OIDC."
   max_session_duration  = 3600
   name                  = "github-actions-oidc-test"
   path                  = "/"
-  permissions_boundary  = null
-  tags                  = {}
-  tags_all              = {}
 }
 
 resource "aws_iam_role" "rds-monitoring" {
@@ -86,12 +74,8 @@ resource "aws_iam_role" "rds-monitoring" {
     }]
     Version = "2012-10-17"
   })
-  description           = null
-  force_detach_policies = null
+  description           = "Allows monitoring RDS."
   max_session_duration  = 3600
   name                  = "rds-monitoring-role"
   path                  = "/"
-  permissions_boundary  = null
-  tags                  = {}
-  tags_all              = {}
 }

@@ -1,7 +1,5 @@
 resource "aws_s3_bucket" "rails-test" {
   bucket = "haya10-s3-test-bucket-r03v"
-
-  tags = {}
 }
 
 resource "aws_s3_bucket_server_side_encryption_configuration" "rails-test" {
