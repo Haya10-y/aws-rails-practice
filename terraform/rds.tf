@@ -1,6 +1,6 @@
 resource "aws_db_subnet_group" "rails-test" {
   name       = "default-vpc-00204fb854441d3f4"
-  description= "Created from the RDS Management Console"
+  description= "DB subnet group for Rails test application"
   subnet_ids = [
     aws_subnet.public_a.id,
     aws_subnet.public_c.id,
@@ -32,7 +32,7 @@ resource "aws_db_instance" "rails-test" {
   parameter_group_name = "default.mysql8.4"
   option_group_name    = "default:mysql-8-4"
 
-  backup_retention_period = 0
+  backup_retention_period = 0 # 本番環境では 7 などの値にすること
   copy_tags_to_snapshot = true
 
   auto_minor_version_upgrade = true

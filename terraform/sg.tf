@@ -18,7 +18,7 @@ resource "aws_security_group" "rds" {
   ]
   egress  = [
     {
-      description = " "
+      description = "Allow all outbound traffic"
       ipv6_cidr_blocks = []
       prefix_list_ids = []
       security_groups = []
@@ -38,7 +38,7 @@ resource "aws_security_group" "elasticache" {
 
   ingress = [
     {
-      description = ""
+      description = "Allow only ECS security group for Redis port"
       cidr_blocks = []
       from_port = 6379
       to_port = 6379
@@ -51,7 +51,7 @@ resource "aws_security_group" "elasticache" {
   ]
   egress  = [
     {
-      description = " "
+      description = "Allow all outbound traffic"
       ipv6_cidr_blocks = []
       prefix_list_ids = []
       security_groups = []
@@ -71,7 +71,7 @@ resource "aws_security_group" "alb" {
 
   ingress = [
     {
-      description = ""
+      description = "Allow all HTTP traffic"
       cidr_blocks = ["0.0.0.0/0"]
       from_port = 80
       to_port = 80
@@ -82,7 +82,7 @@ resource "aws_security_group" "alb" {
       self = false
     },
     {
-      description = ""
+      description = "Allow all HTTPS traffic"
       cidr_blocks = ["0.0.0.0/0"]
       from_port = 443
       to_port = 443
@@ -95,7 +95,7 @@ resource "aws_security_group" "alb" {
   ]
   egress  = [
     {
-      description = " "
+      description = "Allow all outbound traffic"
       ipv6_cidr_blocks = []
       prefix_list_ids = []
       security_groups = []
@@ -115,7 +115,7 @@ resource "aws_security_group" "ecs-exec" {
 
   ingress = [
     {
-      description = ""
+      description = "Allow all HTTPS traffic"
       cidr_blocks = []
       from_port = 443
       to_port = 443
@@ -128,7 +128,7 @@ resource "aws_security_group" "ecs-exec" {
   ]
   egress  = [
     {
-      description = ""
+      description = "Allow all outbound traffic"
       cidr_blocks = ["0.0.0.0/0"]
       from_port = 0
       to_port = 0
@@ -161,7 +161,7 @@ resource "aws_security_group" "ecs" {
   ]
   egress  = [
     {
-      description = " "
+      description = "Allow all outbound traffic"
       ipv6_cidr_blocks = []
       prefix_list_ids = []
       security_groups = []

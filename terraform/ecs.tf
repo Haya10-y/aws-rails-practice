@@ -37,7 +37,7 @@ resource "aws_ecs_task_definition" "rails-test" {
   container_definitions = jsonencode([
     {
       name      = "webapp"
-      image     = "416000664814.dkr.ecr.ap-northeast-1.amazonaws.com/aws-rails-test:latest"
+      image     = "${aws_ecr_repository.rails-test.repository_url}:latest"
       essential = true
 
       portMappings = [
@@ -150,7 +150,7 @@ resource "aws_ecs_task_definition" "rails-test" {
       command = ["bundle", "exec", "sidekiq"]
       portMappings = []
       essential = false
-      image = "416000664814.dkr.ecr.ap-northeast-1.amazonaws.com/aws-rails-test:latest"
+      image = "${aws_ecr_repository.rails-test.repository_url}:latest"
 
       environment = [
         {

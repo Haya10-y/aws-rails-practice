@@ -1,6 +1,6 @@
 resource "aws_elasticache_subnet_group" "valkey" {
   name       = "aws-rails-test-subnet-group-valkey"
-  description = " "
+  description = "Subnet group for Valkey cluster"
   subnet_ids = [
     aws_subnet.private_a.id,
     aws_subnet.private_c.id,
@@ -9,7 +9,7 @@ resource "aws_elasticache_subnet_group" "valkey" {
 
 resource "aws_elasticache_replication_group" "valkey" {
   replication_group_id          = "aws-rails-test-valkey-cluster"
-  description = " "
+  description = "Valkey cluster for Rails test application"
   apply_immediately = false
   auto_minor_version_upgrade = "true"
   cluster_mode = "disabled"
@@ -32,5 +32,5 @@ resource "aws_elasticache_replication_group" "valkey" {
 
   parameter_group_name = "default.valkey7"
 
-  snapshot_retention_limit = 0
+  snapshot_retention_limit = 0 # 本番環境では 1-7 などの値にすること
 }

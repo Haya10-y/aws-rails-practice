@@ -1,7 +1,3 @@
-# __generated__ by Terraform
-# Please review these resources and move them into your main configuration files.
-
-# __generated__ by Terraform
 resource "aws_iam_role" "ecs-task-execution" {
   provider = aws
   assume_role_policy = jsonencode({
@@ -25,15 +21,6 @@ resource "aws_iam_role" "ecs-task-execution" {
   tags_all              = {}
 }
 
-import {
-  to       = aws_iam_role.ecs-task-execution
-  provider = aws
-  identity = {
-    account_id = "416000664814"
-    name       = "ecsTaskExecutionRole"
-  }
-}
-
 resource "aws_iam_role" "secret-values" {
   provider = aws
   assume_role_policy = jsonencode({
@@ -55,15 +42,6 @@ resource "aws_iam_role" "secret-values" {
   permissions_boundary  = null
   tags                  = {}
   tags_all              = {}
-}
-
-import {
-  to       = aws_iam_role.secret-values
-  provider = aws
-  identity = {
-    account_id = "416000664814"
-    name       = "get-secret-values-for-ecs"
-  }
 }
 
 resource "aws_iam_role" "oidc" {
@@ -95,15 +73,6 @@ resource "aws_iam_role" "oidc" {
   tags_all              = {}
 }
 
-import {
-  to       = aws_iam_role.oidc
-  provider = aws
-  identity = {
-    account_id = "416000664814"
-    name       = "github-actions-oidc-test"
-  }
-}
-
 resource "aws_iam_role" "rds-monitoring" {
   provider = aws
   assume_role_policy = jsonencode({
@@ -125,13 +94,4 @@ resource "aws_iam_role" "rds-monitoring" {
   permissions_boundary  = null
   tags                  = {}
   tags_all              = {}
-}
-
-import {
-  to       = aws_iam_role.rds-monitoring
-  provider = aws
-  identity = {
-    account_id = "416000664814"
-    name       = "rds-monitoring-role"
-  }
 }

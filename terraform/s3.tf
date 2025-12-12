@@ -30,8 +30,8 @@ resource "aws_s3_bucket_cors_configuration" "rails-test" {
 resource "aws_s3_bucket_public_access_block" "rails-test" {
   bucket = aws_s3_bucket.rails-test.id
 
-  block_public_acls       = false
+  block_public_acls       = true
   block_public_policy     = true
-  ignore_public_acls      = false
+  ignore_public_acls      = true
   restrict_public_buckets = true
 }
