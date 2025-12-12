@@ -3,3 +3,9 @@
 
 #Ignore Redis files
 /data/*
+
+#Ignore terraform execution files
+/terraform/.terraform/*
+
+#Ignore terraform state files
+/terraform/scratch_state/*
